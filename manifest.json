@@ -1,0 +1,46 @@
+{
+  "name": "Tabla Interactiva Personalizada",
+  "description": "Visualización comunitaria para Looker Studio con tabla interactiva y múltiples funciones.",
+  "resources": {
+    "js": ["https://script.google.com/macros/s/AKfycbysFbPfA4d6bn8B6oyOhfnkUzWQhlzXIgqL0y7JS_PjbimRDE8HVZLU8euN95DXwTkW/exec?file=main.js"],
+    "css": [],
+    "config": {
+      "width": 600,
+      "height": 400
+    }
+  },
+  "fields": [
+    {
+      "id": "dimension",
+      "name": "Dimensión",
+      "type": "DIMENSION",
+      "description": "Campo que representa una categoría o etiqueta."
+    },
+    {
+      "id": "metric",
+      "name": "Métrica",
+      "type": "METRIC",
+      "description": "Campo que representa un valor cuantitativo."
+    }
+  ],
+  "style": {
+    "fontColor": {
+      "id": "fontColor",
+      "type": "COLOR",
+      "defaultValue": "#000000",
+      "description": "El color del texto."
+    },
+    "backgroundColor": {
+      "id": "backgroundColor",
+      "type": "COLOR",
+      "defaultValue": "#ffffff",
+      "description": "El color de fondo de la visualización."
+    },
+    "fontSize": {
+      "id": "fontSize",
+      "type": "NUMBER",
+      "defaultValue": 14,
+      "description": "El tamaño de la fuente."
+    }
+  }
+}
