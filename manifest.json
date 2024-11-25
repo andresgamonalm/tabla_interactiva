@@ -1,0 +1,24 @@
+{
+  "name": "Tabla Interactiva",
+  "description": "Visualización comunitaria para tablas interactivas en Looker Studio.",
+  "resources": {
+    "js": ["main.js"],
+    "css": [],
+    "config": {
+      "width": 600,
+      "height": 400
+    }
+  },
+  "fields": [
+    {
+      "id": "dimension",
+      "name": "Dimensión",
+      "type": "DIMENSION"
+    },
+    {
+      "id": "metric",
+      "name": "Métrica",
+      "type": "METRIC"
+    }
+  ]
+}
