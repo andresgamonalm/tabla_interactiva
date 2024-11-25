@@ -1,46 +1,65 @@
-{
-  "name": "Tabla Interactiva Personalizada",
-  "description": "Visualización comunitaria para Looker Studio con tabla interactiva y múltiples funciones.",
-  "resources": {
-    "js": ["https://script.google.com/macros/s/AKfycbysFbPfA4d6bn8B6oyOhfnkUzWQhlzXIgqL0y7JS_PjbimRDE8HVZLU8euN95DXwTkW/exec?file=main.js"],
-    "css": [],
-    "config": {
-      "width": 600,
-      "height": 400
-    }
-  },
-  "fields": [
-    {
-      "id": "dimension",
-      "name": "Dimensión",
-      "type": "DIMENSION",
-      "description": "Campo que representa una categoría o etiqueta."
-    },
-    {
-      "id": "metric",
-      "name": "Métrica",
-      "type": "METRIC",
-      "description": "Campo que representa un valor cuantitativo."
-    }
-  ],
-  "style": {
-    "fontColor": {
-      "id": "fontColor",
-      "type": "COLOR",
-      "defaultValue": "#000000",
-      "description": "El color del texto."
-    },
-    "backgroundColor": {
-      "id": "backgroundColor",
-      "type": "COLOR",
-      "defaultValue": "#ffffff",
-      "description": "El color de fondo de la visualización."
-    },
-    "fontSize": {
-      "id": "fontSize",
-      "type": "NUMBER",
-      "defaultValue": 14,
-      "description": "El tamaño de la fuente."
-    }
+function doGet(e) {
+  // Si 'e' o 'e.parameter' no están definidos, muestra un mensaje de error
+  if (!e || !e.parameter || !e.parameter.file) {
+    return HtmlService.createHtmlOutput("Especifica un archivo en el parámetro 'file'. Ejemplo: ?file=manifest.json");
+  }
+
+  // Si el parámetro es "manifest.json", genera el contenido dinámico
+  if (e.parameter.file === "manifest.json") {
+    var manifest = {
+      name: "tabla_interactiva",
+      description: "Visualización comunitaria interactiva para Looker Studio.",
+      resources: {
+        js: ["https://script.google.com/macros/s/ID_DEL_SCRIPT/exec?file=main.js"],
+        css: [],
+        config: {
+          width: 600,
+          height: 400
+        }
+      },
+      fields: [
+        {
+          id: "dimension",
+          name: "Dimensión",
+          type: "DIMENSION",
+          description: "Campo que representa una categoría o etiqueta."
+        },
+        {
+          id: "metric",
+          name: "Métrica",
+          type: "METRIC",
+          description: "Campo que representa un valor cuantitativo."
+        }
+      ],
+      style: {
+        fontColor: {
+          id: "fontColor",
+          type: "COLOR",
+          defaultValue: "#000000",
+          description: "El color del texto."
+        },
+        backgroundColor: {
+          id: "backgroundColor",
+          type: "COLOR",
+          defaultValue: "#ffffff",
+          description: "El color de fondo."
+        },
+        fontSize: {
+          id: "fontSize",
+          type: "NUMBER",
+          defaultValue: 14,
+          description: "El tamaño de la fuente en píxeles."
+        }
+      }
+    };
+    return ContentService.createTextOutput(JSON.stringify(manifest))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+
+  // Si no es "manifest.json", intenta devolver un archivo HTML o JS
+  try {
+    return HtmlService.createHtmlOutputFromFile(e.parameter.file);
+  } catch (error) {
+    return HtmlService.createHtmlOutput("El archivo solicitado no existe: " + e.parameter.file);
   }
 }
